@@ -1,2 +1,7 @@
-# ImanAli123.github.io
-Personal portfolio website of Iman Ali – Software Engineering student.
+
+# Iman Ali — Portfolio
+
+Software Engineering student interested in Web Development, Artificial Intelligence, Data Analytics, Digital Marketing, and Graphic Design.
+
+🌐 Portfolio:
+https://ImanAli123.github.io
