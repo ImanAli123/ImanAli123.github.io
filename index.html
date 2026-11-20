@@ -600,6 +600,78 @@
             <div class="section-title">
                 <p>Let's Connect</p>
                 <h2>Contact Me</h2>
+
+                $p = Join-Path (Get-Location) "index.html"
+$all = [System.IO.File]::ReadAllLines($p)
+$n = -1
+for ($i = 0; $i -lt $all.Count; $i++) { if ($all[$i] -like '*class="contact-content"*') { $n = $i; break } }
+if ($n -lt 0) { "contact-content line not found - stop here and tell me" } else {
+$head = ($all[0..$n]) -join "`n"
+$tail = @'
+
+                <p>
+                    I'm open to internships, remote opportunities,
+                    collaborations and professional opportunities.
+                </p>
+
+                <div class="contact-details">
+
+                    <p>
+                        <strong>Email:</strong>
+                        <a href="mailto:emanali4528@gmail.com">
+                            emanali4528@gmail.com
+                        </a>
+                    </p>
+
+                    <p>
+                        <strong>Location:</strong> Pakistan
+                    </p>
+
+                    <p>
+                        <strong>GitHub:</strong>
+                        <a href="https://github.com/ImanAli123"
+                           target="_blank" rel="noopener noreferrer">
+                            github.com/ImanAli123
+                        </a>
+                    </p>
+
+                    <p>
+                        <strong>LinkedIn:</strong>
+                        <a href="https://www.linkedin.com/in/iman-ali0/"
+                           target="_blank" rel="noopener noreferrer">
+                            www.linkedin.com/in/iman-ali0
+                        </a>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <p>
+            &copy; 2026 Iman Ali. All Rights Reserved.
+        </p>
+
+        <p>
+            Built with HTML, CSS &amp; JavaScript.
+        </p>
+
+    </footer>
+
+    <script src="script.js?v=2"></script>
+
+</body>
+</html>
+'@
+$out = ($head + "`n" + $tail).Replace('href="style.css"','href="style.css?v=2"')
+[System.IO.File]::WriteAllText($p, $out, (New-Object System.Text.UTF8Encoding $false))
+"done"
+}
             </div>
 
             <div class="contact-content">
