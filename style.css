@@ -28,6 +28,28 @@ section {
     scroll-margin-top: 80px;
 }
 
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: #38bdf8;
+    color: #0b1120;
+    padding: 10px 16px;
+    font-weight: bold;
+    z-index: 2000;
+}
+
+    .skip-link:focus {
+        left: 10px;
+        top: 10px;
+    }
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid #38bdf8;
+    outline-offset: 3px;
+}
+
 
 /* =========================
    NAVBAR
@@ -79,7 +101,11 @@ header {
 
 .menu-btn {
     display: none;
+    background: none;
+    border: 0;
+    color: inherit;
     font-size: 25px;
+    line-height: 1;
     cursor: pointer;
 }
 
@@ -102,6 +128,7 @@ header {
 .hero-content {
     max-width: 650px;
 }
+
 .hero-skills {
     display: flex;
     flex-wrap: wrap;
@@ -116,6 +143,7 @@ header {
         color: #cbd5e1;
         font-size: 13px;
     }
+
 .intro {
     color: #38bdf8;
     font-size: 20px;
@@ -275,17 +303,14 @@ header {
 
 .projects-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 25px;
-}
-.project-card {
-    overflow: hidden;
 }
 
 .project-image {
-    width: 100% !important;
-    height: 220px !important;
-    object-fit: cover !important;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
     object-position: top center;
     display: block;
 }
@@ -294,6 +319,7 @@ header {
     transform: scale(1.02);
     transition: transform 0.3s ease;
 }
+
 .project-card {
     background: #111827;
     border: 1px solid #1e293b;
@@ -354,7 +380,7 @@ header {
 
 .experience-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 25px;
 }
 
@@ -449,6 +475,7 @@ header {
         text-decoration: underline;
     }
 
+
 /* =========================
    CONTACT
 ========================= */
@@ -492,7 +519,7 @@ footer {
     border-top: 1px solid #1e293b;
     text-align: center;
     padding: 30px 20px;
-    color: #64748b;
+    color: #94a3b8;
     font-size: 14px;
 }
 
@@ -501,11 +528,36 @@ footer {
    RESPONSIVE
 ========================= */
 
-@media (max-width: 850px) {
+@media (max-width: 960px) {
 
     .nav-links {
-        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 18px;
+        background: #111827;
+        border-bottom: 1px solid #1e293b;
+        padding: 0 25px;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        transition: max-height .4s ease, opacity .3s ease, padding .3s ease, visibility 0s linear .4s;
     }
+
+        .nav-links.open {
+            max-height: 500px;
+            opacity: 1;
+            visibility: visible;
+            padding: 20px 25px;
+            transition: max-height .4s ease, opacity .3s ease, padding .3s ease;
+        }
+
+        .nav-links a {
+            font-size: 16px;
+        }
 
     .menu-btn {
         display: block;
@@ -548,5 +600,20 @@ footer {
 
     .section-title h2 {
         font-size: 32px;
+    }
+}
+
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    * {
+        transition: none !important;
     }
 }

@@ -1,40 +1,32 @@
 // Mobile menu
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
 
-const menuBtn = document.querySelector(".menu-btn");
-const navLinks = document.querySelector(".nav-links");
+function setMenu(open) {
+    navLinks.classList.toggle("open", open);
+    menuBtn.setAttribute("aria-expanded", String(open));
+    menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    menuBtn.textContent = open ? "\u2715" : "\u2630";
+}
 
-menuBtn.addEventListener("click", () => {
+menuBtn.addEventListener("click", () =>
+    setMenu(!navLinks.classList.contains("open")));
 
-    if (navLinks.style.display === "flex") {
+// Close when a link is clicked
+navLinks.querySelectorAll("a").forEach(link =>
+    link.addEventListener("click", () => setMenu(false)));
 
-        navLinks.style.display = "none";
-
-    } else {
-
-        navLinks.style.display = "flex";
-        navLinks.style.flexDirection = "column";
-        navLinks.style.position = "absolute";
-        navLinks.style.top = "70px";
-        navLinks.style.right = "20px";
-        navLinks.style.background = "#111827";
-        navLinks.style.padding = "20px";
-        navLinks.style.borderRadius = "10px";
-
-    }
-
+// Close with Escape
+document.addEventListener("keydown", e => {
+    if (e.key === "Escape") setMenu(false);
 });
 
+// Close when clicking outside the header
+document.addEventListener("click", e => {
+    if (!e.target.closest("header")) setMenu(false);
+});
 
-// Close mobile menu when a link is clicked
-
-document.querySelectorAll(".nav-links a").forEach(link => {
-
-    link.addEventListener("click", () => {
-
-        if (window.innerWidth <= 850) {
-            navLinks.style.display = "none";
-        }
-
-    });
-
+// Reset when the window grows past the mobile breakpoint
+window.addEventListener("resize", () => {
+    if (window.innerWidth > 960) setMenu(false);
 });
